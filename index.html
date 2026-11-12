@@ -348,24 +348,6 @@
           <a href="#panduan" class="hover:text-blue-500 transition"
             >Panduan &amp; Unduh APK</a
           >
-          <a
-            href="https://noteroute-backend.onrender.com"
-            target="_blank"
-            class="px-3 py-1 rounded-full bg-blue-500/10 hover:bg-blue-600 text-blue-600 hover:text-white dark:text-blue-400 dark:hover:text-white transition flex items-center space-x-1 font-semibold border border-blue-500/30 text-xs"
-            title="Buka Aplikasi Web Utama (React SPA di Render)"
-          >
-            <span>Buka Web App</span>
-            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-          </a>
-          <a
-            id="nav-link-notebook-saya"
-            href="https://noteroute-backend.onrender.com"
-            target="_blank"
-            class="hidden hover:text-blue-500 transition flex items-center space-x-1 font-bold text-blue-600 dark:text-blue-400"
-          >
-            <span>Notebook Saya</span>
-            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-          </a>
         </nav>
 
         <!-- Right Action Controls & User Auth Indicator -->
@@ -414,14 +396,14 @@
             id="nav-auth-container"
             class="hidden flex items-center space-x-2.5"
           >
-            <a
-              href="https://noteroute-backend.onrender.com"
-              target="_blank"
-              class="px-3.5 py-1.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold flex items-center space-x-1.5 shadow-sm shadow-blue-500/20 transition"
+            <button
+              type="button"
+              onclick="openMainApp(event)"
+              class="px-3.5 py-1.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold flex items-center space-x-1.5 shadow-sm shadow-blue-500/20 transition cursor-pointer"
             >
               <i class="fa-solid fa-folder-open text-xs"></i>
               <span>Buka Aplikasi Utama</span>
-            </a>
+            </button>
 
             <!-- User Avatar Dropdown Trigger -->
             <div class="relative">
@@ -462,26 +444,16 @@
                   </div>
                 </div>
                 <div class="py-1 text-xs">
-                  <a
-                    href="https://noteroute-backend.onrender.com"
-                    target="_blank"
-                    class="w-full px-3 py-1.5 rounded-xl hover:bg-[var(--nlm-surface-hover)] flex items-center space-x-2 text-[var(--nlm-text-primary)] transition"
+                  <button
+                    type="button"
+                    onclick="openMainApp(event); toggleUserNavMenu();"
+                    class="w-full text-left px-3 py-1.5 rounded-xl hover:bg-[var(--nlm-surface-hover)] flex items-center space-x-2 text-[var(--nlm-text-primary)] transition cursor-pointer"
                   >
                     <i
                       class="fa-solid fa-folder-open text-[11px] w-4 text-blue-500"
                     ></i>
                     <span>Buka Workspace Utama</span>
-                  </a>
-                  <a
-                    href="/app"
-                    onclick="if(window.location.protocol === 'file:'){ this.href = 'web/dist/index.html'; }"
-                    class="w-full px-3 py-1.5 rounded-xl hover:bg-[var(--nlm-surface-hover)] flex items-center space-x-2 text-[var(--nlm-text-primary)] transition"
-                  >
-                    <i
-                      class="fa-solid fa-laptop-code text-[11px] w-4 text-purple-500"
-                    ></i>
-                    <span>Ruang Kerja AI (React App)</span>
-                  </a>
+                  </button>
                 </div>
                 <div class="pt-1 border-t border-[var(--nlm-border-subtle)] space-y-0.5">
                   <button
@@ -564,15 +536,15 @@
         </button>
 
         <div class="pt-2 border-t border-[var(--nlm-border-subtle)] space-y-1.5">
-          <a
+          <button
             id="mobile-drawer-notebook-link"
-            href="https://noteroute-backend.onrender.com"
-            target="_blank"
-            class="w-full px-3 py-2.5 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 font-semibold text-xs flex items-center justify-center space-x-1.5 transition text-center"
+            type="button"
+            onclick="openMainApp(event); closeMobileMenu();"
+            class="hidden w-full px-3 py-2.5 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 font-semibold text-xs flex items-center justify-center space-x-1.5 transition text-center cursor-pointer"
           >
             <i class="fa-solid fa-folder-open text-xs"></i>
-            <span>Buka Aplikasi Web NoteRoute</span>
-          </a>
+            <span>Buka Aplikasi Utama NoteRoute</span>
+          </button>
           <button
             id="mobile-drawer-logout-btn"
             type="button"
@@ -2035,10 +2007,11 @@
         if (authWrap) authWrap.classList.remove("hidden");
 
         const nbLink = document.getElementById("nav-link-notebook-saya");
-        if (nbLink) nbLink.classList.remove("hidden");
-
         const mobileLogoutBtn = document.getElementById("mobile-drawer-logout-btn");
         if (mobileLogoutBtn) mobileLogoutBtn.classList.remove("hidden");
+
+        const mobileAppBtn = document.getElementById("mobile-drawer-notebook-link");
+        if (mobileAppBtn) mobileAppBtn.classList.remove("hidden");
 
         const nameEl = document.getElementById("nav-user-fullname");
         const emailEl = document.getElementById("nav-user-email");
@@ -2060,6 +2033,13 @@
           } catch (e) {}
         }
 
+        if (imgAvatar) {
+          imgAvatar.onerror = function () {
+            this.classList.add("hidden");
+            if (txtAvatar) txtAvatar.classList.remove("hidden");
+          };
+        }
+
         if (avatarSrc) {
           imgAvatar.src = avatarSrc;
           imgAvatar.classList.remove("hidden");
@@ -2078,11 +2058,11 @@
         if (unauthWrap) unauthWrap.classList.remove("hidden");
         if (authWrap) authWrap.classList.add("hidden");
 
-        const nbLink = document.getElementById("nav-link-notebook-saya");
-        if (nbLink) nbLink.classList.add("hidden");
-
         const mobileLogoutBtn = document.getElementById("mobile-drawer-logout-btn");
         if (mobileLogoutBtn) mobileLogoutBtn.classList.add("hidden");
+
+        const mobileAppBtn = document.getElementById("mobile-drawer-notebook-link");
+        if (mobileAppBtn) mobileAppBtn.classList.add("hidden");
 
         const dropdown = document.getElementById("user-nav-dropdown");
         if (dropdown) dropdown.classList.add("hidden");
@@ -2356,16 +2336,17 @@
         }
       }
 
-      // Konfigurasi URL Aplikasi Utama NoteRoute (React SPA)
-      const MAIN_APP_URL =
-        window.location.hostname === "localhost" ||
-        window.location.hostname === "127.0.0.1"
-          ? "http://localhost:3000"
-          : "https://noteroute-backend.onrender.com";
+      // Konfigurasi Target URL Aplikasi Utama NoteRoute (React SPA)
+      function getMainAppUrl() {
+        const customUrl = localStorage.getItem("noteroute_main_app_url");
+        if (customUrl) return customUrl;
+        return "http://localhost:3000";
+      }
 
       function openMainApp(e) {
         if (e && e.preventDefault) e.preventDefault();
-        window.open(MAIN_APP_URL, "_blank");
+        const targetUrl = getMainAppUrl();
+        window.open(targetUrl, "_blank");
       }
 
       function handleHeroCtaClick() {
