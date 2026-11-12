@@ -2340,7 +2340,10 @@
       function getMainAppUrl() {
         const customUrl = localStorage.getItem("noteroute_main_app_url");
         if (customUrl) return customUrl;
-        return "http://localhost:3000";
+        if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+          return "http://localhost:3000";
+        }
+        return "https://crootagent.github.io/noteroute/";
       }
 
       function openMainApp(e) {
