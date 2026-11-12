@@ -349,8 +349,18 @@
             >Panduan &amp; Unduh APK</a
           >
           <a
+            href="https://noteroute-backend.onrender.com"
+            target="_blank"
+            class="px-3 py-1 rounded-full bg-blue-500/10 hover:bg-blue-600 text-blue-600 hover:text-white dark:text-blue-400 dark:hover:text-white transition flex items-center space-x-1 font-semibold border border-blue-500/30 text-xs"
+            title="Buka Aplikasi Web Utama (React SPA di Render)"
+          >
+            <span>Buka Web App</span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          </a>
+          <a
             id="nav-link-notebook-saya"
-            href="landing/index.html"
+            href="https://noteroute-backend.onrender.com"
+            target="_blank"
             class="hidden hover:text-blue-500 transition flex items-center space-x-1 font-bold text-blue-600 dark:text-blue-400"
           >
             <span>Notebook Saya</span>
@@ -405,11 +415,12 @@
             class="hidden flex items-center space-x-2.5"
           >
             <a
-              href="landing/index.html"
+              href="https://noteroute-backend.onrender.com"
+              target="_blank"
               class="px-3.5 py-1.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold flex items-center space-x-1.5 shadow-sm shadow-blue-500/20 transition"
             >
               <i class="fa-solid fa-folder-open text-xs"></i>
-              <span>Buka Notebook</span>
+              <span>Buka Aplikasi Utama</span>
             </a>
 
             <!-- User Avatar Dropdown Trigger -->
@@ -452,13 +463,14 @@
                 </div>
                 <div class="py-1 text-xs">
                   <a
-                    href="landing/index.html"
+                    href="https://noteroute-backend.onrender.com"
+                    target="_blank"
                     class="w-full px-3 py-1.5 rounded-xl hover:bg-[var(--nlm-surface-hover)] flex items-center space-x-2 text-[var(--nlm-text-primary)] transition"
                   >
                     <i
                       class="fa-solid fa-folder-open text-[11px] w-4 text-blue-500"
                     ></i>
-                    <span>Buka Workspace</span>
+                    <span>Buka Workspace Utama</span>
                   </a>
                   <a
                     href="/app"
@@ -554,11 +566,12 @@
         <div class="pt-2 border-t border-[var(--nlm-border-subtle)] space-y-1.5">
           <a
             id="mobile-drawer-notebook-link"
-            href="landing/index.html"
+            href="https://noteroute-backend.onrender.com"
+            target="_blank"
             class="w-full px-3 py-2.5 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 font-semibold text-xs flex items-center justify-center space-x-1.5 transition text-center"
           >
             <i class="fa-solid fa-folder-open text-xs"></i>
-            <span>Buka Workspace NoteRoute</span>
+            <span>Buka Aplikasi Web NoteRoute</span>
           </a>
           <button
             id="mobile-drawer-logout-btn"
@@ -1420,7 +1433,7 @@
               type="button"
               onclick="switchGuideTab('cloud')"
               class="w-full sm:w-auto text-center sm:text-left px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 transition cursor-pointer"
-              title="Panduan Pembuatan Akun GCP, Alwaysdata & MongoDB"
+              title="Panduan Pembuatan Akun GCP, Render &amp; MongoDB Atlas"
             >
               <i class="fa-solid fa-cloud mr-1.5"></i>4. Cloud &amp; DB
             </button>
@@ -2247,9 +2260,9 @@
         closeAuthModal();
         showToast("Selamat Datang!", `Berhasil masuk sebagai ${user.name}.`);
 
-        // Redirect or navigate smoothly to notebooks
+        // Redirect or navigate smoothly to main web app
         setTimeout(() => {
-          window.location.href = "landing/index.html";
+          openMainApp();
         }, 700);
       }
 
@@ -2303,7 +2316,7 @@
         );
 
         setTimeout(() => {
-          window.location.href = "landing/index.html";
+          openMainApp();
         }, 700);
       }
 
@@ -2343,9 +2356,21 @@
         }
       }
 
+      // Konfigurasi URL Aplikasi Utama NoteRoute (React SPA)
+      const MAIN_APP_URL =
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+          ? "http://localhost:3000"
+          : "https://noteroute-backend.onrender.com";
+
+      function openMainApp(e) {
+        if (e && e.preventDefault) e.preventDefault();
+        window.open(MAIN_APP_URL, "_blank");
+      }
+
       function handleHeroCtaClick() {
         if (currentUser && currentUser.isLoggedIn) {
-          window.location.href = "landing/index.html";
+          openMainApp();
         } else {
           openAuthModal("signup");
         }
@@ -2353,15 +2378,7 @@
 
       function handleOpenWebClick(e) {
         if (e) e.preventDefault();
-        if (currentUser && currentUser.isLoggedIn) {
-          window.location.href = "landing/index.html";
-        } else {
-          showToast(
-            "Pendaftaran Diperlukan",
-            "Silakan daftar akun terlebih dahulu untuk mengakses NoteRoute Web."
-          );
-          openAuthModal("signup");
-        }
+        openMainApp(e);
       }
 
       function switchGuideTab(tab) {
@@ -2441,7 +2458,7 @@
           if (tabCloud) tabCloud.className = activeClass;
           box.innerHTML = `
             <h3 class="font-bold text-[var(--nlm-text-primary)] text-base sm:text-lg mb-3">
-              Langkah 4: Tata Cara Pembuatan Akun Cloud (GCP, Alwaysdata &amp; MongoDB)
+              Langkah 4: Tata Cara Pembuatan Akun Cloud (GCP, Render &amp; MongoDB Atlas)
             </h3>
             <p class="text-xs sm:text-sm text-[var(--nlm-text-secondary)] mb-4 leading-relaxed">
               Ikuti tiga langkah mudah berikut untuk mengonfigurasi layanan cloud resmi NoteRoute:
@@ -2611,6 +2628,6 @@
     </script>
 
     <!-- JSCroot Micro-Framework Module for NoteRoute Release & Setup Guides -->
-    <script type="module" src="landing/js/main.js"></script>
+    <script type="module" src="js/main.js"></script>
   </body>
 </html>

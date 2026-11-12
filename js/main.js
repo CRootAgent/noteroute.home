@@ -10,7 +10,7 @@ import { getJSON } from "https://cdn.jsdelivr.net/gh/jscroot/api@0.0.6/croot.js"
 // Konfigurasi Repositori GitHub Proyek 2 NoteRoute
 const GITHUB_REPO = "CRootAgent/noteroute";
 const GITHUB_RELEASES_API = `https://api.github.com/repos/${GITHUB_REPO}/releases/latest`;
-const ALWAYS_DATA_API_HEALTH = "https://noteroute.alwaysdata.net/api/health";
+const RENDER_API_HEALTH = "https://noteroute-backend.onrender.com/health";
 
 /**
  * 1. Ambil Metadata Rilis APK Otomatis via GitHub Releases API
@@ -139,12 +139,12 @@ function setupGuideTabs() {
     `);
   });
 
-  // Tab 4: Panduan Pembuatan Akun Cloud (GCP, Alwaysdata & MongoDB)
+  // Tab 4: Panduan Pembuatan Akun Cloud (GCP, Render & MongoDB Atlas)
   if (tabCloud) {
     onClick("tab-btn-cloud", () => {
       activateTab(tabCloud);
       setInner("guide-box", `
-        <h3 class="font-bold text-[var(--nlm-text-primary)] text-lg mb-3">Langkah 4: Tata Cara Pembuatan Akun Cloud (GCP, Alwaysdata & MongoDB)</h3>
+        <h3 class="font-bold text-[var(--nlm-text-primary)] text-lg mb-3">Langkah 4: Tata Cara Pembuatan Akun Cloud (GCP, Render &amp; MongoDB Atlas)</h3>
         <p class="text-sm text-[var(--nlm-text-secondary)] mb-4 leading-relaxed">
           Ikuti tiga langkah mudah berikut untuk mengonfigurasi layanan cloud resmi NoteRoute:
         </p>
@@ -159,13 +159,13 @@ function setupGuideTabs() {
             </p>
           </div>
 
-          <!-- Alwaysdata -->
+          <!-- Render -->
           <div class="p-3.5 rounded-2xl bg-[var(--nlm-surface-variant)] border border-[var(--nlm-border)] space-y-1.5">
             <div class="flex items-center space-x-2">
-              <span class="px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-[11px]">2. Alwaysdata (Hosting Cloud Backend)</span>
+              <span class="px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-[11px]">2. Render Cloud (Hosting Backend - 100% Gratis Tanpa Kartu Kredit)</span>
             </div>
             <p class="text-xs text-[var(--nlm-text-secondary)] leading-relaxed">
-              Daftar akun gratis di <a href="https://admin.alwaysdata.com" target="_blank" class="text-emerald-600 dark:text-emerald-400 font-semibold underline">admin.alwaysdata.com</a> &bull; Buka menu <em>Web &gt; Sites</em> &bull; Tambahkan situs baru bertipe <strong>Node.js (v20.x)</strong> &bull; Masukkan repositori <code>CRootAgent/noteroute</code> &bull; Hubungkan domain publik HTTPS: <code>https://noteroute.alwaysdata.net/api</code>.
+              Daftar akun gratis di <a href="https://dashboard.render.com" target="_blank" class="text-emerald-600 dark:text-emerald-400 font-semibold underline">dashboard.render.com</a> (login via GitHub) &bull; Klik <em>New &gt; Web Service</em> &bull; Hubungkan repositori <code>CRootAgent/noteroute</code> (Root Dir: <code>server</code>) &bull; Pilih tier Free &bull; Pasang domain publik HTTPS: <code>https://noteroute-backend.onrender.com/api</code>.
             </p>
           </div>
 
@@ -181,7 +181,7 @@ function setupGuideTabs() {
         </div>
         <p class="text-xs text-[var(--nlm-text-tertiary)] flex items-center space-x-2">
           <i class="fa-solid fa-circle-check text-emerald-500"></i>
-          <span>Setelah ketiga kredensial terpasang, backend cloud Alwaysdata akan otomatis tersambung ke MongoDB Atlas dan API Gemini.</span>
+          <span>Setelah ketiga kredensial terpasang, backend cloud Render akan otomatis tersambung ke MongoDB Atlas dan API Gemini.</span>
         </p>
       `);
     });

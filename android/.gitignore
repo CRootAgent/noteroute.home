@@ -1,8 +1,0 @@
-# Android-specific gitignore (Domain Izat)
-*.jks
-*.keystore
-keystore_base64.txt
-.gradle/
-build/
-local.properties
-.cxx/
