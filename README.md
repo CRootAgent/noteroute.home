@@ -1,45 +1,36 @@
-# 🌐 NoteRoute Official Web Landing & Documentation Portal
-
-Situs web resmi landing page dan portal panduan aplikasi **NoteRoute** (*Cross-Device Knowledge Agent & Multi-LLM Gateway*).  
-Dihosting langsung melalui **GitHub Pages**.
-
----
-
-## 📌 Deskripsi & Spesifikasi Tugas Proyek 2
-
-> - **Repository Inti:** [CRootAgent/noteroute](https://github.com/CRootAgent/noteroute)
-> - **Aplikasi Mobile:** Berbasis Android Native Kotlin (MVVM, Retrofit, WorkManager)
-> - **CI/CD Workflow:** Otomatis auto-tag (`v1.0.0`) dan release APK & AAB ke GitHub Releases
-> - **Deadline:** 10 November 2026
-> - **Landing Page:** Tata cara panduan lengkap, direct APK download URL, dan panduan akun GCP, Alwaysdata, MongoDB
+# NoteRoute 🚀
+> **Cross-Device Knowledge Agent & Multi-LLM Gateway Router**  
+> Proyek 2 – *CRUD & Code Coverage* | D4 Teknik Informatika, Universitas Logistik dan Bisnis Internasional (ULBI)
 
 ---
 
-## 👥 Tim Pengembang
+## 👥 Tim Pengembang (Kelompok 12)
+- **Ahmad Zakky Nurfauzan** (NPM: 714250028) – Ketua Tim  
+  *Modul A: Backend Core Engine, Multi-LLM Router, Cloud Infra (MongoDB Atlas, Alwaysdata, GCP), CI/CD Actions, Web Landing Page*
+- **Izat Ibrahimovic Irawan** (NPM: 714250024) – Anggota Tim  
+  *Modul B: Native Android Application (Kotlin), Mobile File Explorer & Downloader, Document Chat UI (NotebookLM-Style), Keystore Signing*
 
-* **Ahmad Zakky Nurfauzan (NPM: 714250028)** — *Modul A: Backend Core Engine, Multi-LLM Router, Cloud Infra (MongoDB Atlas, Alwaysdata, GCP), CI/CD Actions, Web Landing Page*
-* **Izat Ibrahimovic Irawan (NPM: 714250024)** — *Modul B: Native Android Kotlin, Mobile File Explorer, Offline Sync, 1:1 NotebookLM Mobile UI*
-
----
-
-## 🚀 Fitur Landing Page Portal
-
-1. **Direct Download APK Release:**
-   * Terhubung langsung ke URL rilis biner resmi:  
-     [`https://github.com/CRootAgent/noteroute/releases/latest/download/app-release.apk`](https://github.com/CRootAgent/noteroute/releases/latest/download/app-release.apk)
-   * Dilengkapi metadata reaktif bertenaga micro-framework **JSCroot** yang memanggil GitHub Releases API secara real-time.
-2. **Tab Panduan Interaktif:**
-   * **Langkah 1:** Setup Agen Sinkronisasi Dokumen di Laptop (`npm install && npm start`).
-   * **Langkah 2:** Registrasi API Key Gratis (Google Gemini 1.5 Flash 1M token & Groq Llama 3.3).
-   * **Langkah 3:** Menghubungkan ke 9Router / OmniRoute lokal (port 20128).
-   * **Langkah 4:** Tata cara pembuatan akun cloud (Google Cloud Platform / AI Studio, Alwaysdata hosting, dan MongoDB Atlas).
-3. **Workspace & Prototipe Terintegrasi:**
-   * Akses langsung ke [Ruang Kerja Web](landing/index.html) (*NotebookLM Workspace Dashboard*).
-   * Akses langsung ke [Prototipe Aplikasi Android](docs/android.html).
+**Dosen Pembimbing:** Rolly Maulana Awangga, S.T., M.T., CAIP.  
+**Target Deadline Rilis:** 10 November 2026 (v1.0.0)
 
 ---
 
-## 📦 Repositori Terkait
+## 📂 Struktur Repositori Terisolasi (Anti-Bentrok)
+```
+noteroute/
+├── android/            # 📱 Modul B: Native Android Kotlin Client (Eksklusif Izat)
+├── server/             # 🖥️ Modul A: Express.js REST API & AI Router (Eksklusif Zakky)
+├── landing/            # 🌐 Modul A: Web Landing Page & User Guide (Eksklusif Zakky)
+├── docs/               # 📜 Kontrak API, Data Schema, & Keystore Spec (Single Source of Truth)
+│   ├── API_CONTRACT.md
+│   └── KEYSTORE_AND_SECRETS_SPEC.md
+├── .github/            # ⚙️ Workflows CI/CD (Android Auto-Release & Backend Test) & CODEOWNERS
+└── PANDUAN_KOLABORASI_ANTI_BENTROK.md # 🤝 Panduan Kolaborasi & Git Workflow
+```
 
-* **Core Engine & Android App Repo:** [https://github.com/CRootAgent/noteroute](https://github.com/CRootAgent/noteroute)
-* **Backend Production API:** `https://noteroute.alwaysdata.net/api`
+---
+
+## 📖 Panduan Kolaborasi & Kontrak
+- Silakan baca panduan anti-bentrok selengkapnya di [PANDUAN_KOLABORASI_ANTI_BENTROK.md](./PANDUAN_KOLABORASI_ANTI_BENTROK.md).
+- Spesifikasi REST API & Schema Model Kotlin di [docs/API_CONTRACT.md](./docs/API_CONTRACT.md).
+- Format signing keystore dan GitHub Actions Secrets di [docs/KEYSTORE_AND_SECRETS_SPEC.md](./docs/KEYSTORE_AND_SECRETS_SPEC.md).
