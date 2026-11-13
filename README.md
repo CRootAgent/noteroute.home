@@ -24,27 +24,29 @@ Repositori **`noteroute.home`** dikhususkan secara eksklusif sebagai portal publ
 1. **Pusat Unduhan APK Resmi**:
    - Terintegrasi langsung dengan GitHub Releases API repositori `CRootAgent/noteroute`.
    - Mengambil versi tag rilis terbaru, ukuran file, tanggal rilis, dan tombol unduh langsung file biner `.apk` hasil build otomatis GitHub Actions CI/CD.
-2. **Panduan Pengguna & Pengaturan Cloud (Lengkap)**:
-   - **Langkah 1 (Setup Laptop):** Panduan menjalankan agen sinkronisasi dokumen laptop.
+2. **Panduan Pengguna (3 Langkah Cepat)**:
+   - **Langkah 1 (Setup Laptop):** Panduan menjalankan backend Express.js NoteRoute di laptop.
    - **Langkah 2 (API Key Gratis):** Cara mendapatkan kunci API Google Gemini (AI Studio) & Groq Cloud tanpa biaya.
    - **Langkah 3 (9Router Lokal):** Konfigurasi inferensi offline lokal pada port 20128.
-   - **Langkah 4 (Cloud & Database):**
-     - **GCP / AI Studio:** Kuota 1.500 req/hari & 1 Juta token.
-     - **Render Cloud:** Hosting backend Node.js (100% gratis tanpa kartu kredit).
-     - **MongoDB Atlas:** Database cloud NoSQL cluster M0 Shared.
-3. **Didukung Micro-Framework JSCroot**:
-   - Memanfaatkan library **JSCroot (CRootJS)** buatan Pak Rolly Maulana Awangga (`jscroot/element` & `jscroot/api`) untuk fetch API metadata rilis GitHub dan manipulasi DOM reaktif tanpa build step.
+3. **Teknologi Frontend Modern**:
+   - Dibangun dengan **React 18 + Vite + Tailwind CSS** dan **Lucide React Icons**, terorganisir modular dalam komponen.
 4. **Tautan Langsung ke Aplikasi Utama**:
-   - Pengunjung dapat langsung mengakses web app utama NoteRoute yang di-host di Render ([https://noteroute-backend.onrender.com](https://noteroute-backend.onrender.com)) melalui tombol navigasi.
+   - Pengunjung dapat langsung mengakses web app utama NoteRoute ([https://crootagent.github.io/noteroute](https://crootagent.github.io/noteroute/)) saat akun telah masuk.
 
 ---
 
 ## 📂 Struktur Berkas
 ```
 noteroute.home/
-├── index.html       # Berkas utama landing page resmi NoteRoute
-├── js/
-│   └── main.js      # Skrip modul JSCroot (GitHub Release API & Tab Switcher Panduan)
-├── .nojekyll        # Konfigurasi bypass pemrosesan Jekyll di GitHub Pages
-└── README.md        # Dokumentasi repositori
+├── index.html          # Entry point SPA terkompilasi untuk GitHub Pages
+├── assets/             # Asset bundle JS & CSS terkompilasi
+├── src/                # Komponen modular React 18 + Tailwind CSS
+│   ├── components/     # Navbar, Hero, About, HowItWorks, Features, Ecosystem, QuickGuide, AuthModal, Footer
+│   ├── App.jsx         # Root component & state management
+│   ├── main.jsx        # Entry point React DOM
+│   └── index.css       # Tailwind CSS directives
+├── index.html.template # Template HTML untuk mode pengembangan Vite
+├── vite.config.js      # Konfigurasi Vite & sinkronisasi otomatis GitHub Pages
+├── tailwind.config.js  # Konfigurasi Tailwind CSS
+└── README.md           # Dokumentasi repositori
 ```
