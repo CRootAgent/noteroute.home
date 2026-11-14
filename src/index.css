@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply antialiased selection:bg-blue-500/30 selection:text-blue-200;
   }
@@ -10,4 +13,188 @@
 
 html.dark {
   color-scheme: dark;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+.animate-scaleUp {
+  animation: scaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ======================================================== */
+/* SLIDING AUTH MODAL ANIMATION (AUTHENTIC 2-PANEL SLIDER) */
+/* ======================================================== */
+.auth-slider-box {
+  border-radius: 28px;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+  width: 780px;
+  max-width: 100%;
+  min-height: 540px;
+  transition: all 0.3s ease;
+}
+
+.form-panel {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.sign-in-panel {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+}
+
+.auth-slider-box.right-panel-active .sign-in-panel {
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sign-up-panel {
+  left: 0;
+  width: 50%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.auth-slider-box.right-panel-active .sign-up-panel {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  animation: authShowAnim 0.6s;
+}
+
+@keyframes authShowAnim {
+  0%, 49.99% {
+    opacity: 0;
+    z-index: 1;
+  }
+  50%, 100% {
+    opacity: 1;
+    z-index: 5;
+  }
+}
+
+.overlay-slider-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+  z-index: 40;
+  border-radius: 24px;
+}
+
+.auth-slider-box.right-panel-active .overlay-slider-container {
+  transform: translateX(-100%);
+}
+
+.overlay-slider {
+  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 45%, #4f46e5 100%);
+  color: #ffffff;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+  border-radius: 24px;
+}
+
+.auth-slider-box.right-panel-active .overlay-slider {
+  transform: translateX(50%);
+}
+
+.overlay-content {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  text-align: center;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  transform: translateX(0);
+  transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.overlay-left-content {
+  transform: translateX(-20%);
+}
+
+.auth-slider-box.right-panel-active .overlay-left-content {
+  transform: translateX(0);
+}
+
+.overlay-right-content {
+  right: 0;
+  transform: translateX(0);
+}
+
+.auth-slider-box.right-panel-active .overlay-right-content {
+  transform: translateX(20%);
+}
+
+@media (max-width: 768px) {
+  .auth-slider-box {
+    width: 100%;
+    max-width: 440px;
+    min-height: 540px;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+  .sign-in-panel,
+  .sign-up-panel {
+    width: 100%;
+    position: relative;
+    min-height: 480px;
+  }
+  .overlay-slider-container {
+    display: none;
+  }
+  .auth-slider-box.right-panel-active .sign-in-panel {
+    display: none;
+  }
+  .auth-slider-box.right-panel-active .sign-up-panel {
+    transform: none;
+    opacity: 1;
+    display: block;
+  }
+  .auth-slider-box:not(.right-panel-active) .sign-up-panel {
+    display: none;
+  }
+  .auth-slider-box:not(.right-panel-active) .sign-in-panel {
+    display: block;
+    opacity: 1;
+    transform: none;
+  }
 }

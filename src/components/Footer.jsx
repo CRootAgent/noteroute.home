@@ -7,8 +7,8 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pb-6 border-b border-slate-100 dark:border-slate-800">
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center">
-              <FolderOpen className="w-4 h-4" />
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-sky-500 text-white flex items-center justify-center shadow-sm">
+              <i className="fa-solid fa-book-bookmark text-sm"></i>
             </div>
             <div>
               <div className="font-bold text-slate-900 dark:text-white text-sm">NoteRoute 2.0</div>

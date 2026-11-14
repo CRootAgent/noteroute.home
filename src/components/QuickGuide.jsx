@@ -1,22 +1,31 @@
 import React, { useState } from 'react';
-import { Download, Terminal, Key, Cpu, CheckCircle2, ExternalLink } from 'lucide-react';
+import { Download, Laptop, Smartphone, CheckCircle2, ShieldCheck, ArrowRight, ExternalLink } from 'lucide-react';
 
 export default function QuickGuide() {
-  const [activeTab, setActiveTab] = useState('laptop');
+  const [activeTab, setActiveTab] = useState('web');
   const APK_URL = "https://github.com/CRootAgent/noteroute/releases/latest";
+
+  const getWebAppUrl = () => {
+    if (typeof window !== 'undefined') {
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        return 'http://localhost:3000/';
+      }
+    }
+    return 'https://crootagent.github.io/noteroute/';
+  };
 
   return (
     <section id="panduan" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 border-t border-slate-200 dark:border-slate-800">
-      <div className="text-center space-y-3 mb-10">
+      <div className="text-center space-y-3 mb-12">
         <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-xs font-bold uppercase tracking-wider">
-          <Terminal className="w-3.5 h-3.5" />
-          <span>Panduan Cepat &amp; APK</span>
+          <i className="fa-solid fa-book-open text-xs"></i>
+          <span>Panduan Penggunaan &amp; Unduh APK</span>
         </div>
         <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-          Mulai Menggunakan NoteRoute dalam 3 Langkah
+          Panduan Cara Penggunaan NoteRoute
         </h2>
         <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-xl mx-auto leading-relaxed">
-          Ikuti panduan ringkas di bawah ini untuk menghubungkan laptop Anda ke aplikasi Android.
+          Pelajari langkah mudah menggunakan NoteRoute pada versi Web peramban laptop dan aplikasi mobile Android.
         </p>
       </div>
 
@@ -24,163 +33,206 @@ export default function QuickGuide() {
         {/* Left 2 Cols: Interactive Guide Tabs */}
         <div className="lg:col-span-2 space-y-4">
           {/* Tab Navigation Buttons */}
-          <div className="flex flex-wrap gap-2 p-1.5 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+          <div className="flex gap-2 p-1.5 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
             <button
-              onClick={() => setActiveTab('laptop')}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition cursor-pointer flex items-center space-x-1.5 ${
-                activeTab === 'laptop'
+              onClick={() => setActiveTab('web')}
+              className={`flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold transition cursor-pointer flex items-center justify-center space-x-2 ${
+                activeTab === 'web'
                   ? 'bg-blue-600 text-white shadow-xs'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
-              <Terminal className="w-3.5 h-3.5" />
-              <span>1. Setup Laptop</span>
+              <Laptop className="w-4 h-4" />
+              <span>1. Cara Penggunaan Versi Web</span>
             </button>
 
             <button
-              onClick={() => setActiveTab('apikey')}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition cursor-pointer flex items-center space-x-1.5 ${
-                activeTab === 'apikey'
-                  ? 'bg-blue-600 text-white shadow-xs'
+              onClick={() => setActiveTab('android')}
+              className={`flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold transition cursor-pointer flex items-center justify-center space-x-2 ${
+                activeTab === 'android'
+                  ? 'bg-emerald-600 text-white shadow-xs'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
-              <Key className="w-3.5 h-3.5" />
-              <span>2. API Key Gratis</span>
-            </button>
-
-            <button
-              onClick={() => setActiveTab('9router')}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition cursor-pointer flex items-center space-x-1.5 ${
-                activeTab === '9router'
-                  ? 'bg-blue-600 text-white shadow-xs'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-              }`}
-            >
-              <Cpu className="w-3.5 h-3.5" />
-              <span>3. OmniRoute / 9Router Lokal</span>
+              <Smartphone className="w-4 h-4" />
+              <span>2. Cara Penggunaan Versi Android</span>
             </button>
           </div>
 
           {/* Tab Content Box */}
-          <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm min-h-[260px]">
-            {activeTab === 'laptop' && (
+          <div className="p-6 sm:p-7 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm min-h-[320px]">
+            {activeTab === 'web' ? (
               <div className="space-y-4">
-                <h3 className="text-base font-bold text-slate-900 dark:text-white">
-                  Langkah 1: Jalankan Backend NoteRoute di Laptop
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                  Server backend lokal bertugas mengekstrak berkas dokumen materi kuliah dan menyediakan REST API Gateway untuk diakses oleh HP Android.
-                </p>
-                <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 text-slate-200 text-xs font-mono overflow-x-auto space-y-1">
-                  <div className="text-slate-500"># 1. Buka terminal laptop dan masuk ke folder server</div>
-                  <div className="text-blue-400">cd noteroute/server</div>
-                  <div className="text-slate-500 pt-2"># 2. Pasang dependensi dan jalankan server Express</div>
-                  <div className="text-emerald-400">npm install</div>
-                  <div className="text-emerald-400">npm start</div>
+                <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center space-x-2">
+                    <Laptop className="w-4 h-4 text-blue-500" />
+                    <span>Langkah Mudah Menggunakan NoteRoute Web</span>
+                  </h3>
+                  <a
+                    href={getWebAppUrl()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-blue-500 hover:underline flex items-center space-x-1 font-semibold"
+                  >
+                    <span>Buka Web App</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
                 </div>
-                <div className="flex items-center space-x-2 text-xs text-slate-500">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                  <span>Server aktif di port 3000 dan langsung tersambung ke database MongoDB Atlas.</span>
-                </div>
-              </div>
-            )}
 
-            {activeTab === 'apikey' && (
-              <div className="space-y-4">
-                <h3 className="text-base font-bold text-slate-900 dark:text-white">
-                  Langkah 2: Dapatkan API Key Gratis (Rp 0)
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                  NoteRoute dirancang menggunakan kuota inferensi gratis dari Google AI Studio dan Groq Cloud:
-                </p>
-                <div className="space-y-2.5">
-                  <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                    <div>
-                      <div className="text-xs font-bold text-slate-900 dark:text-white">Google Gemini 1.5 Flash</div>
-                      <div className="text-[11px] text-slate-500">1.500 request/hari gratis (1M context window)</div>
+                <div className="space-y-3">
+                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-start space-x-3">
+                    <div className="w-7 h-7 rounded-lg bg-blue-500/10 text-blue-600 font-bold text-xs flex items-center justify-center shrink-0">
+                      1
                     </div>
-                    <a
-                      href="https://aistudio.google.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-3 py-1.5 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-semibold flex items-center space-x-1"
-                    >
-                      <span>aistudio.google.com</span>
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-900 dark:text-white">Masuk atau Buat Akun Baru</h4>
+                      <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5 leading-relaxed">
+                        Klik tombol <strong>Masuk / Daftar</strong>. Masukkan email dan sandi minimal 8 karakter (kombinasi kapital, huruf kecil, angka, dan simbol).
+                      </p>
+                    </div>
                   </div>
 
-                  <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                    <div>
-                      <div className="text-xs font-bold text-slate-900 dark:text-white">Groq Cloud (Llama 3.3 70B)</div>
-                      <div className="text-[11px] text-slate-500">Inferensi kilat 300+ token/detik</div>
+                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-start space-x-3">
+                    <div className="w-7 h-7 rounded-lg bg-blue-500/10 text-blue-600 font-bold text-xs flex items-center justify-center shrink-0">
+                      2
                     </div>
-                    <a
-                      href="https://console.groq.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-3 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-semibold flex items-center space-x-1"
-                    >
-                      <span>console.groq.com</span>
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-900 dark:text-white">Buat Notebook &amp; Unggah Berkas Kuliah</h4>
+                      <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5 leading-relaxed">
+                        Di Beranda, tekan <strong>+ Buat baru</strong>. Masuk ke workspace dan unggah slide atau modul kuliah (PDF, DOCX, TXT, Markdown).
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-start space-x-3">
+                    <div className="w-7 h-7 rounded-lg bg-blue-500/10 text-blue-600 font-bold text-xs flex items-center justify-center shrink-0">
+                      3
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-900 dark:text-white">Tanya Jawab Multi-LLM dengan Sitasi Halaman</h4>
+                      <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5 leading-relaxed">
+                        Ketik pertanyaan di panel tengah. Pilih AI: Gemini 1.5 Flash, Llama 3.3 70B, DeepSeek R1/V3, atau 9Router Lokal. Dapatkan jawaban dengan kutipan akurat.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-start space-x-3">
+                    <div className="w-7 h-7 rounded-lg bg-blue-500/10 text-blue-600 font-bold text-xs flex items-center justify-center shrink-0">
+                      4
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-900 dark:text-white">Manfaatkan Panel Studio &amp; Ikhtisar Audio</h4>
+                      <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5 leading-relaxed">
+                        Gunakan panel kanan untuk membuat Panduan Belajar, Briefing Doc, FAQ, Linimasa catatan, dan dengarkan Ikhtisar Audio (Deep Dive).
+                      </p>
+                    </div>
                   </div>
                 </div>
-                <p className="text-[11px] text-slate-500">
-                  Salin kunci ke berkas <code className="font-mono text-slate-400">server/.env</code> atau simpan langsung di menu Pengaturan aplikasi Android NoteRoute.
-                </p>
               </div>
-            )}
-
-            {activeTab === '9router' && (
+            ) : (
               <div className="space-y-4">
-                <h3 className="text-base font-bold text-slate-900 dark:text-white">
-                  Langkah 3: Jalankan OmniRoute / 9Router Lokal (Opsional)
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                  Jika Anda menjalankan daemon 9Router atau model lokal di laptop pada port <code>20128</code>:
-                </p>
-                <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 text-slate-200 text-xs font-mono overflow-x-auto space-y-1">
-                  <div className="text-slate-500"># Jalankan 9Router daemon di laptop</div>
-                  <div className="text-blue-400">9router start --port 20128</div>
-                  <div className="text-slate-500 pt-2"># Endpoint OpenAI-compatible aktif di:</div>
-                  <div className="text-emerald-400">http://localhost:20128/v1/chat/completions</div>
+                <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center space-x-2">
+                    <Smartphone className="w-4 h-4 text-emerald-500" />
+                    <span>Langkah Menggunakan Klien Android NoteRoute</span>
+                  </h3>
+                  <a
+                    href={APK_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-emerald-500 hover:underline flex items-center space-x-1 font-semibold"
+                  >
+                    <span>Unduh APK</span>
+                    <Download className="w-3.5 h-3.5" />
+                  </a>
                 </div>
-                <div className="flex items-center space-x-2 text-xs text-slate-500">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                  <span>Router NoteRoute akan otomatis mendeteksi ketersediaan port 20128 untuk inferensi offline.</span>
+
+                <div className="space-y-3">
+                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-start space-x-3">
+                    <div className="w-7 h-7 rounded-lg bg-emerald-500/10 text-emerald-600 font-bold text-xs flex items-center justify-center shrink-0">
+                      1
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-900 dark:text-white">Unduh &amp; Pasang APK NoteRoute</h4>
+                      <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5 leading-relaxed">
+                        Unduh berkas APK melalui kartu di samping. Buka di smartphone Android Anda dan berikan izin pemasangan aplikasi pihak ketiga.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-start space-x-3">
+                    <div className="w-7 h-7 rounded-lg bg-emerald-500/10 text-emerald-600 font-bold text-xs flex items-center justify-center shrink-0">
+                      2
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-900 dark:text-white">Masuk Menggunakan Akun yang Sama</h4>
+                      <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5 leading-relaxed">
+                        Login dengan email dan sandi yang telah Anda daftarkan di web. Daftar notebook dan berkas materi otomatis tersinkronisasi.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-start space-x-3">
+                    <div className="w-7 h-7 rounded-lg bg-emerald-500/10 text-emerald-600 font-bold text-xs flex items-center justify-center shrink-0">
+                      3
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-900 dark:text-white">Baca Materi Kuliah Secara Offline</h4>
+                      <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5 leading-relaxed">
+                        Dokumen yang telah diunduh tersimpan dalam cache lokal HP. Baca slide materi kuliah kapan saja tanpa memerlukan kuota internet.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-start space-x-3">
+                    <div className="w-7 h-7 rounded-lg bg-emerald-500/10 text-emerald-600 font-bold text-xs flex items-center justify-center shrink-0">
+                      4
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-900 dark:text-white">Keamanan Kunci via Hardware Keystore</h4>
+                      <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5 leading-relaxed">
+                        Kunci API disimpan secara hardware-backed menggunakan Android Keystore untuk privasi data mahasiswa yang optimal.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
           </div>
         </div>
 
-        {/* Right Col: APK Download Card */}
-        <div className="p-6 rounded-3xl bg-blue-600 text-white shadow-xl space-y-4">
-          <div className="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center">
-            <Download className="w-5 h-5 text-white" />
+        {/* Right 1 Col: APK Download Box */}
+        <div className="p-6 rounded-3xl bg-gradient-to-b from-blue-600 to-indigo-700 text-white shadow-xl space-y-6">
+          <div className="space-y-2">
+            <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-white/10 text-white text-xs font-semibold">
+              <Download className="w-3.5 h-3.5" />
+              <span>Paket Rilis Android Resmi</span>
+            </div>
+            <h3 className="text-xl font-bold tracking-tight">Unduh NoteRoute APK</h3>
+            <p className="text-xs text-blue-100 leading-relaxed">
+              Dapatkan installer APK versi 1.0.0 siap pasang untuk semua tipe smartphone Android (versi 10.0 ke atas).
+            </p>
           </div>
-          <div>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-blue-200">Rilis Resmi GitHub</span>
-            <h3 className="text-xl font-bold mt-0.5">NoteRoute Android APK</h3>
-          </div>
-          <p className="text-xs text-blue-100 leading-relaxed">
-            Pasang langsung di HP Android Anda. Terkoneksi ke laptop dan mendukung pembaca dokumen serta inferensi AI instan.
-          </p>
 
-          <div className="p-3.5 rounded-2xl bg-white/10 text-xs space-y-1.5 font-mono">
-            <div className="flex justify-between">
-              <span className="text-blue-200">Versi:</span>
-              <span className="font-bold">v1.0.0</span>
+          <div className="p-4 rounded-2xl bg-white/10 border border-white/10 space-y-2.5 text-xs">
+            <div className="flex justify-between items-center text-blue-100">
+              <span>Versi Rilis</span>
+              <span className="font-mono font-bold text-white">v1.0.0 (Stable)</span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-blue-200">Arsitektur:</span>
-              <span className="font-bold">Kotlin / Android 8.0+</span>
+            <div className="flex justify-between items-center text-blue-100">
+              <span>Ukuran Berkas</span>
+              <span className="font-mono text-white">~24.8 MB</span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-blue-200">Format:</span>
-              <span className="font-bold">Universal APK</span>
+            <div className="flex justify-between items-center text-blue-100">
+              <span>Minimum OS</span>
+              <span className="text-white">Android 10.0 (API 29+)</span>
+            </div>
+            <div className="flex justify-between items-center text-blue-100">
+              <span>Integritas</span>
+              <span className="text-emerald-300 font-semibold flex items-center space-x-1">
+                <CheckCircle2 className="w-3.5 h-3.5" />
+                <span>SHA-256 Validated</span>
+              </span>
             </div>
           </div>
 
@@ -188,11 +240,16 @@ export default function QuickGuide() {
             href={APK_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full py-3 px-4 rounded-xl bg-white hover:bg-slate-100 text-blue-600 font-bold text-xs flex items-center justify-center space-x-2 transition shadow-md cursor-pointer"
+            className="w-full py-3.5 rounded-2xl bg-white hover:bg-blue-50 text-blue-600 font-bold text-xs flex items-center justify-center space-x-2 shadow-lg transition cursor-pointer"
           >
             <Download className="w-4 h-4" />
-            <span>Unduh Berkas APK (.apk)</span>
+            <span>Unduh File APK Sekarang</span>
           </a>
+
+          <div className="flex items-center space-x-2 text-[11px] text-blue-200">
+            <ShieldCheck className="w-4 h-4 shrink-0 text-emerald-300" />
+            <span>Bebas iklan, aman, dan telah diverifikasi sebelum rilis publik.</span>
+          </div>
         </div>
       </div>
     </section>
