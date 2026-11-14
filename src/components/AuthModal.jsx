@@ -257,7 +257,7 @@ export default function AuthModal({ isOpen, onClose, onAuthSuccess, initialMode 
                   required
                   value={signInEmail}
                   onChange={(e) => setSignInEmail(e.target.value)}
-                  placeholder="email@kampus.ac.id"
+                  placeholder="nama@email.com"
                   className="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 transition"
                 />
               </div>
@@ -327,7 +327,7 @@ export default function AuthModal({ isOpen, onClose, onAuthSuccess, initialMode 
               Buat Akun NoteRoute
             </h2>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              Sinkronkan dokumen materi kuliah laptop dan Android.
+              Sinkronkan catatan dan dokumen Anda di laptop dan Android.
             </p>
           </div>
 
@@ -367,7 +367,7 @@ export default function AuthModal({ isOpen, onClose, onAuthSuccess, initialMode 
                   required
                   value={signUpEmail}
                   onChange={(e) => setSignUpEmail(e.target.value)}
-                  placeholder="email@kampus.ac.id"
+                  placeholder="nama@email.com"
                   className="w-full pl-9 pr-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 transition"
                 />
               </div>
@@ -457,7 +457,7 @@ export default function AuthModal({ isOpen, onClose, onAuthSuccess, initialMode 
               </div>
               <h2 className="text-2xl font-bold tracking-tight text-white">Sudah Punya Akun?</h2>
               <p className="text-xs text-blue-100 leading-relaxed max-w-xs">
-                Masuk dengan kredensial terdaftar Anda untuk melanjutkan eksplorasi dokumen perkuliahan.
+                Masuk dengan akun terdaftar Anda untuk melanjutkan eksplorasi dokumen dan catatan.
               </p>
               <button
                 type="button"
@@ -474,11 +474,11 @@ export default function AuthModal({ isOpen, onClose, onAuthSuccess, initialMode 
             {/* OVERLAY RIGHT CONTENT (VISIBLE WHEN SIGN IN IS ACTIVE) */}
             <div className="overlay-content overlay-right-content space-y-4">
               <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-2xl mx-auto shadow-inner">
-                <i className="fa-solid fa-graduation-cap text-white"></i>
+                <i className="fa-solid fa-book-bookmark text-white"></i>
               </div>
-              <h2 className="text-2xl font-bold tracking-tight text-white">Halo, Rekan Mahasiswa!</h2>
+              <h2 className="text-2xl font-bold tracking-tight text-white">Selamat Datang di NoteRoute!</h2>
               <p className="text-xs text-blue-100 leading-relaxed max-w-xs">
-                Belum memiliki akun? Daftarkan diri Anda secara gratis untuk mulai menghubungkan materi kuliah dengan AI.
+                Belum memiliki akun? Daftarkan akun Anda untuk menghubungkan dokumen dan catatan dengan AI.
               </p>
               <button
                 type="button"
