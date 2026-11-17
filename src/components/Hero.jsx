@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Download, ArrowRight, Sparkles, CheckCircle2, Zap, Shield, Laptop } from 'lucide-react';
+import { fetchLatestRelease } from '../services/jscroot';
 
 export default function Hero({ onOpenAuth, onOpenMainApp, user }) {
-  const APK_DOWNLOAD_URL = "https://github.com/CRootAgent/noteroute/releases/latest";
+  const [apkDownloadUrl, setApkDownloadUrl] = useState("https://github.com/CRootAgent/noteroute/releases/latest");
+  const [versionTag, setVersionTag] = useState("v1.0.0");
+
+  useEffect(() => {
+    fetchLatestRelease((release) => {
+      if (release?.tag_name) {
+        setVersionTag(release.tag_name);
+      }
+      const apkAsset = release?.assets?.find((a) => a.name?.endsWith('.apk'));
+      if (apkAsset?.browser_download_url) {
+        setApkDownloadUrl(apkAsset.browser_download_url);
+      } else if (release?.html_url) {
+        setApkDownloadUrl(release.html_url);
+      }
+    });
+  }, []);
 
   return (
     <section className="relative pt-12 pb-20 sm:pt-20 sm:pb-28 overflow-hidden">
@@ -29,13 +45,13 @@ export default function Hero({ onOpenAuth, onOpenMainApp, user }) {
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2">
           <a
-            href={APK_DOWNLOAD_URL}
+            href={apkDownloadUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm flex items-center justify-center space-x-2 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:-translate-y-0.5 transition cursor-pointer"
           >
             <Download className="w-4 h-4" />
-            <span>Unduh NoteRoute APK (v1.0.0)</span>
+            <span>Unduh NoteRoute APK ({versionTag})</span>
           </a>
 
           {user ? (
